@@ -1,13 +1,18 @@
 import {useState} from 'react'; 
 import Header from './components/Header';
 import Tasks from './components/Tasks';
-import Button from './components/Button';
 function App() {
-  const [tasks, settasks] = useState([{title: 'make bed', id: 1, completed: true}, {title: 'make coffee', id: 2, completed: false}, {title: 'drink coffee', id: 3, completed: true}])    
+  const [tasks, settasks] = useState([{title: 'make bed', day: 'Fri 5th at 3:00 pm' ,id: 1, completed: true}, {title: 'make coffee',  day: 'Thu 4th at 3:00 pm', id: 2, completed: false}, {title: 'drink coffee',  day: 'Sat 6th at 3:00 pm', id: 3, completed: true}])    
+  
+  const deleteTask = (id) => {
+    settasks(tasks.filter((task) => 
+      task.id !== id
+    ))
+}
   return (
     <div className="container">
       <Header title={'Task Tracker'}/>
-      <Tasks tasks={tasks}/>
+{tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask}/> : 'No tasks to show'}
     </div>
   );
 }
