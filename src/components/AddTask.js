@@ -1,30 +1,29 @@
 import {useState} from 'react';
 const AddTask = ({addTask}) => {
-    const [text, setText] = useState('')
+    const [title, setTitle] = useState('')
     const [day, setDay] = useState('')
-    const [completion, setCompletion] = useState(false)
+    const [completed, setCompleted] = useState(false)
 
     const onSubmit = (e) => {
-e.preventDefault()
+        e.preventDefault()
 
-if(!text) {
-    alert('please add task')
-    return
-}
+        if(!title) {
+            alert('please enter text')
+            return
+        }
 
-addTask({text, day, completion})
-
-setText('')
-setDay('')
-setCompletion(false)
+        addTask({title, day, completed})
+        setTitle('')
+        setDay('')
+        setCompleted(false)
     }
     return (
         <form className='add-form' onSubmit={onSubmit}>
 
             <div className='form-control'>
                 <label>Task</label>
-            <input type='text' placeholder='Add Task' value={text} onChange={(e)=> 
-setText(e.target.value)
+            <input type='text' placeholder='Add Task' value={title} onChange={(e)=> 
+setTitle(e.target.value)
             }></input>
             </div>
 
@@ -37,8 +36,8 @@ setDay(e.target.value)
 
             <div className='form-control form-control-check' >
             <label>Set Completion</label>
-            <input type='checkbox' checked={completion} value={completion} onChange={(e)=> 
-setCompletion(e.currentTarget.checked)
+            <input type='checkbox' checked={completed} value={completed} onChange={(e)=> 
+setCompleted(e.currentTarget.checked)
             }></input>
             </div>
 
